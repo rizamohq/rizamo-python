@@ -1,0 +1,16 @@
+{
+  "cliVersion": "5.223.1",
+  "generatorName": "fernapi/fern-python-sdk",
+  "generatorVersion": "5.42.4",
+  "generatorConfig": {
+    "client": {
+      "class_name": "Rizamo"
+    }
+  },
+  "originGitCommit": "0ab97745d22f316c34fa8e2d470f337ff1b0aebb",
+  "originGitCommitIsDirty": false,
+  "invokedBy": "ci",
+  "requestedVersion": "1.0.0",
+  "ciProvider": "github",
+  "sdkVersion": "1.0.0"
+}
