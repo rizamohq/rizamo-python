@@ -153,7 +153,7 @@ class TargetOptionsTiktok(UniversalBaseModel):
     Send it to the creator's TikTok inbox as a draft instead of publishing. The person finishes it in the TikTok app, where TikTok asks for every other choice; the target is published once it reaches the inbox, with no link.
     """
 
-    consent: typing.Optional[str] = pydantic.Field(default=None)
+    consent: typing.Optional[bool] = pydantic.Field(default=None)
     """
     Required to publish: the person saw the post, the account's name and these choices, and agreed to TikTok's Music Usage Confirmation (and its Branded Content Policy for branded content). Never set it without asking.
     """

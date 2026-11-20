@@ -6,13 +6,12 @@ import pydantic
 import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ..core.serialization import FieldMetadata
-from .actor_key_id_type import ActorKeyIdType
 
 
-class ActorKeyId(UniversalBaseModel):
-    type: ActorKeyIdType
-    key_id: typing_extensions.Annotated[str, FieldMetadata(alias="keyId"), pydantic.Field(alias="keyId")]
+class ActorUser(UniversalBaseModel):
+    user_id: typing_extensions.Annotated[str, FieldMetadata(alias="userId"), pydantic.Field(alias="userId")]
     name: str
+    initials: str
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

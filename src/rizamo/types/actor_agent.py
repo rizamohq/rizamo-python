@@ -8,11 +8,9 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ..core.serialization import FieldMetadata
 from .actor_agent_agent import ActorAgentAgent
 from .actor_agent_on_behalf_of import ActorAgentOnBehalfOf
-from .actor_agent_type import ActorAgentType
 
 
 class ActorAgent(UniversalBaseModel):
-    type: ActorAgentType
     agent: typing.Optional[ActorAgentAgent] = None
     name: str
     agent_id: typing_extensions.Annotated[

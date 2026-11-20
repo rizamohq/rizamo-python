@@ -21,7 +21,7 @@ class TargetOptionsLinkedinPoll(UniversalBaseModel):
     2 to 4 answers, each up to 30 characters.
     """
 
-    days: typing.Optional[str] = pydantic.Field(default=None)
+    days: typing.Optional[int] = pydantic.Field(default=None)
     """
     How long it stays open: 1, 3, 7 or 14 days. Left out: 7.
     """

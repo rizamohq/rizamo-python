@@ -6,11 +6,9 @@ import pydantic
 import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ..core.serialization import FieldMetadata
-from .actor_automation_id_type import ActorAutomationIdType
 
 
-class ActorAutomationId(UniversalBaseModel):
-    type: ActorAutomationIdType
+class ActorAutomation(UniversalBaseModel):
     automation_id: typing_extensions.Annotated[
         str, FieldMetadata(alias="automationId"), pydantic.Field(alias="automationId")
     ]

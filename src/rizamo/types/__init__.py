@@ -24,17 +24,13 @@ if typing.TYPE_CHECKING:
     from .account_status import AccountStatus
     from .active_hours import ActiveHours
     from .active_hours_hours_item import ActiveHoursHoursItem
-    from .actor import Actor
+    from .actor import Actor, Actor_Agent, Actor_ApiKey, Actor_Automation, Actor_User
     from .actor_agent import ActorAgent
     from .actor_agent_agent import ActorAgentAgent
     from .actor_agent_on_behalf_of import ActorAgentOnBehalfOf
-    from .actor_agent_type import ActorAgentType
-    from .actor_automation_id import ActorAutomationId
-    from .actor_automation_id_type import ActorAutomationIdType
-    from .actor_initials import ActorInitials
-    from .actor_initials_type import ActorInitialsType
-    from .actor_key_id import ActorKeyId
-    from .actor_key_id_type import ActorKeyIdType
+    from .actor_api_key import ActorApiKey
+    from .actor_automation import ActorAutomation
+    from .actor_user import ActorUser
     from .analytics_note import AnalyticsNote
     from .analytics_overview import AnalyticsOverview
     from .analytics_overview_attribution import AnalyticsOverviewAttribution
@@ -225,13 +221,13 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ActorAgent": ".actor_agent",
     "ActorAgentAgent": ".actor_agent_agent",
     "ActorAgentOnBehalfOf": ".actor_agent_on_behalf_of",
-    "ActorAgentType": ".actor_agent_type",
-    "ActorAutomationId": ".actor_automation_id",
-    "ActorAutomationIdType": ".actor_automation_id_type",
-    "ActorInitials": ".actor_initials",
-    "ActorInitialsType": ".actor_initials_type",
-    "ActorKeyId": ".actor_key_id",
-    "ActorKeyIdType": ".actor_key_id_type",
+    "ActorApiKey": ".actor_api_key",
+    "ActorAutomation": ".actor_automation",
+    "ActorUser": ".actor_user",
+    "Actor_Agent": ".actor",
+    "Actor_ApiKey": ".actor",
+    "Actor_Automation": ".actor",
+    "Actor_User": ".actor",
     "AnalyticsNote": ".analytics_note",
     "AnalyticsOverview": ".analytics_overview",
     "AnalyticsOverviewAttribution": ".analytics_overview_attribution",
@@ -446,13 +442,13 @@ __all__ = [
     "ActorAgent",
     "ActorAgentAgent",
     "ActorAgentOnBehalfOf",
-    "ActorAgentType",
-    "ActorAutomationId",
-    "ActorAutomationIdType",
-    "ActorInitials",
-    "ActorInitialsType",
-    "ActorKeyId",
-    "ActorKeyIdType",
+    "ActorApiKey",
+    "ActorAutomation",
+    "ActorUser",
+    "Actor_Agent",
+    "Actor_ApiKey",
+    "Actor_Automation",
+    "Actor_User",
     "AnalyticsNote",
     "AnalyticsOverview",
     "AnalyticsOverviewAttribution",
