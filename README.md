@@ -3,12 +3,13 @@
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=Rizamo%2FPython)
 [![pypi](https://img.shields.io/pypi/v/rizamo)](https://pypi.python.org/pypi/rizamo)
 
-The Rizamo Python library provides convenient access to the Rizamo APIs from Python.
+Publish, schedule and measure social posts on Instagram, Facebook, TikTok, Threads, LinkedIn and YouTube from your code, answer comments and messages, and receive webhooks. Docs: https://docs.rizamo.com
 
 ## Table of Contents
 
 - [Installation](#installation)
 - [Reference](#reference)
+- [Agents](#agents)
 - [Usage](#usage)
 - [Environments](#environments)
 - [Async Client](#async-client)
@@ -30,6 +31,15 @@ pip install rizamo
 ## Reference
 
 A full reference for this library is available [here](./reference.md).
+
+## Agents
+
+Agents read the docs as text at https://docs.rizamo.com/llms.txt, or ask about this SDK on DeepWiki:
+
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/rizamohq/rizamo-python)
+
+An agent that works through MCP connects to https://mcp.rizamo.com/mcp instead, with no code.
+
 
 ## Usage
 
