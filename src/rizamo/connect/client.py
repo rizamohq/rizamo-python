@@ -36,7 +36,7 @@ class ConnectClient:
         """
         A link to send a person to within 30 minutes: it goes straight to the network, and connects accounts once (a preview or a second browser that opens it uses nothing up). They log in on the network, with no Rizamo account, and come back to `redirectUrl`, or, without one, land on a Rizamo page that says what was connected (for a chat agent, a script or n8n). `instagram` is Instagram Login, for an Instagram professional account on its own; `facebook` is Facebook Login, its Pages and the Instagram accounts linked to them, which can also add music to reels and get each story's final numbers when it ends (deleting Instagram posts will need it too, once Meta reviews Rizamo's access). LinkedIn connects in the web app only, as LinkedIn's terms ask: no connect link offers it. Once connected there, LinkedIn accounts publish and report through the API and MCP.
 
-        A login that reaches one new account the key may add connects it at once; one that reaches several (Pages, YouTube channels), or an account already in the team, shows the person a page to pick them, with only new accounts ticked. An account already in the team in a profile the key does not reach is never added. With `connectionId`, only that login's accounts are renewed.
+        A login that reaches one new account the key may add connects it at once; one that reaches several (Pages, YouTube channels, Google Business Profile locations), or an account already in the team, shows the person a page to pick them, with only new accounts ticked. An account already in the team in a profile the key does not reach is never added. With `connectionId`, only that login's accounts are renewed.
 
         Back at `redirectUrl`, Rizamo adds `status` (connected or error), `network`, `profileId`, and either `accountIds` with each one's `billing` in the same order, comma-separated, or `error` (cancelled, refused, no_accounts, expired, used, unavailable, forbidden, gone, failed) and `message`. Nothing in it works without your key: read the accounts with `GET /accounts/{id}`. A return can arrive more than once (a reload): take `GET /accounts` (`list_accounts`) as the truth. A link opened once it is used or expired, or after your key lost access, stays on a Rizamo page that says why: only a person back from the network comes to `redirectUrl`.
 
@@ -47,7 +47,7 @@ class ConnectClient:
         Parameters
         ----------
         network : LinkConnectRequestNetwork
-            Where the person logs in: instagram (Instagram Login, a professional account on its own), facebook (Facebook Login: Pages and the Instagram accounts linked to them), tiktok, threads or youtube. LinkedIn connects in the web app only, as LinkedIn's terms ask: no connect link offers it. Once connected there, LinkedIn accounts publish and report through the API and MCP.
+            Where the person logs in: instagram (Instagram Login, a professional account on its own), facebook (Facebook Login: Pages and the Instagram accounts linked to them), tiktok, threads, youtube or google (Google Business Profile: the locations the person owns or manages, each one account). LinkedIn connects in the web app only, as LinkedIn's terms ask: no connect link offers it. Once connected there, LinkedIn accounts publish and report through the API and MCP.
 
         profile_id : typing.Optional[str]
             The profile (`prof_`) new accounts go to. Required unless `connectionId` is given.
@@ -116,7 +116,7 @@ class AsyncConnectClient:
         """
         A link to send a person to within 30 minutes: it goes straight to the network, and connects accounts once (a preview or a second browser that opens it uses nothing up). They log in on the network, with no Rizamo account, and come back to `redirectUrl`, or, without one, land on a Rizamo page that says what was connected (for a chat agent, a script or n8n). `instagram` is Instagram Login, for an Instagram professional account on its own; `facebook` is Facebook Login, its Pages and the Instagram accounts linked to them, which can also add music to reels and get each story's final numbers when it ends (deleting Instagram posts will need it too, once Meta reviews Rizamo's access). LinkedIn connects in the web app only, as LinkedIn's terms ask: no connect link offers it. Once connected there, LinkedIn accounts publish and report through the API and MCP.
 
-        A login that reaches one new account the key may add connects it at once; one that reaches several (Pages, YouTube channels), or an account already in the team, shows the person a page to pick them, with only new accounts ticked. An account already in the team in a profile the key does not reach is never added. With `connectionId`, only that login's accounts are renewed.
+        A login that reaches one new account the key may add connects it at once; one that reaches several (Pages, YouTube channels, Google Business Profile locations), or an account already in the team, shows the person a page to pick them, with only new accounts ticked. An account already in the team in a profile the key does not reach is never added. With `connectionId`, only that login's accounts are renewed.
 
         Back at `redirectUrl`, Rizamo adds `status` (connected or error), `network`, `profileId`, and either `accountIds` with each one's `billing` in the same order, comma-separated, or `error` (cancelled, refused, no_accounts, expired, used, unavailable, forbidden, gone, failed) and `message`. Nothing in it works without your key: read the accounts with `GET /accounts/{id}`. A return can arrive more than once (a reload): take `GET /accounts` (`list_accounts`) as the truth. A link opened once it is used or expired, or after your key lost access, stays on a Rizamo page that says why: only a person back from the network comes to `redirectUrl`.
 
@@ -127,7 +127,7 @@ class AsyncConnectClient:
         Parameters
         ----------
         network : LinkConnectRequestNetwork
-            Where the person logs in: instagram (Instagram Login, a professional account on its own), facebook (Facebook Login: Pages and the Instagram accounts linked to them), tiktok, threads or youtube. LinkedIn connects in the web app only, as LinkedIn's terms ask: no connect link offers it. Once connected there, LinkedIn accounts publish and report through the API and MCP.
+            Where the person logs in: instagram (Instagram Login, a professional account on its own), facebook (Facebook Login: Pages and the Instagram accounts linked to them), tiktok, threads, youtube or google (Google Business Profile: the locations the person owns or manages, each one account). LinkedIn connects in the web app only, as LinkedIn's terms ask: no connect link offers it. Once connected there, LinkedIn accounts publish and report through the API and MCP.
 
         profile_id : typing.Optional[str]
             The profile (`prof_`) new accounts go to. Required unless `connectionId` is given.

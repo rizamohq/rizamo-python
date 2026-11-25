@@ -7,10 +7,10 @@
       "class_name": "Rizamo"
     }
   },
-  "originGitCommit": "89de7b984972d30316897d2ec600ec08fa9e387c",
+  "originGitCommit": "8868af9a801aea5aaa8edb5010911ec07f72c2bb",
   "originGitCommitIsDirty": false,
   "invokedBy": "ci",
-  "requestedVersion": "1.3.0",
+  "requestedVersion": "1.4.0",
   "ciProvider": "github",
-  "sdkVersion": "1.3.0"
+  "sdkVersion": "1.4.0"
 }

@@ -49,7 +49,7 @@ class RawNetworkPostsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SyncPager[NetworkPost, ListNetworkPostsResponse]:
         """
-        Every post on the team's connected accounts, whoever made it: published through Rizamo (`origin` rizamo, with its `postId`) or in the network's own apps (`external`). Newest first, a page at a time: pass `nextCursor` as `cursor` for the next one. Rizamo finds new posts within the hour; when an account is connected it reads back 12 months. A LinkedIn profile's posts made outside Rizamo are not listed, as LinkedIn lists them to select developers only. Each post has its latest metrics, read 1 hour and 6 hours after it went out (TikTok's and YouTube's from 24 hours, as their numbers come a day or more late), then daily to day 90 and every 30 days after (YouTube every 28).
+        Every post on the team's connected accounts, whoever made it: published through Rizamo (`origin` rizamo, with its `postId`) or in the network's own apps (`external`). Newest first, a page at a time: pass `nextCursor` as `cursor` for the next one. Rizamo finds new posts within the hour; when an account is connected it reads back 12 months. A LinkedIn profile's posts made outside Rizamo are not listed, as LinkedIn lists them to select developers only. Each post has its latest metrics, read 1 hour and 6 hours after it went out (TikTok's and YouTube's from 24 hours, as their numbers come a day or more late), then daily to day 90 and every 30 days after (YouTube every 28; Google Business Profile every 28).
 
         Parameters
         ----------
@@ -341,7 +341,7 @@ class RawNetworkPostsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[NetworkPostTimeline]:
         """
-        What each day added to the post's numbers, and the totals after it, from Rizamo's reads: 1 hour and 6 hours after it went out (TikTok's and YouTube's from 24 hours), then daily to day 90 and every 30 days after (YouTube every 28). A day with no point had no change. A change between two reads several days apart is one point over those days, never split, and `gaps` says why, as it does for days Rizamo could not read. Days are the profile's.
+        What each day added to the post's numbers, and the totals after it, from Rizamo's reads: 1 hour and 6 hours after it went out (TikTok's and YouTube's from 24 hours), then daily to day 90 and every 30 days after (YouTube every 28; Google Business Profile every 28). A day with no point had no change. A change between two reads several days apart is one point over those days, never split, and `gaps` says why, as it does for days Rizamo could not read. Days are the profile's.
 
         Parameters
         ----------
@@ -483,7 +483,7 @@ class AsyncRawNetworkPostsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncPager[NetworkPost, ListNetworkPostsResponse]:
         """
-        Every post on the team's connected accounts, whoever made it: published through Rizamo (`origin` rizamo, with its `postId`) or in the network's own apps (`external`). Newest first, a page at a time: pass `nextCursor` as `cursor` for the next one. Rizamo finds new posts within the hour; when an account is connected it reads back 12 months. A LinkedIn profile's posts made outside Rizamo are not listed, as LinkedIn lists them to select developers only. Each post has its latest metrics, read 1 hour and 6 hours after it went out (TikTok's and YouTube's from 24 hours, as their numbers come a day or more late), then daily to day 90 and every 30 days after (YouTube every 28).
+        Every post on the team's connected accounts, whoever made it: published through Rizamo (`origin` rizamo, with its `postId`) or in the network's own apps (`external`). Newest first, a page at a time: pass `nextCursor` as `cursor` for the next one. Rizamo finds new posts within the hour; when an account is connected it reads back 12 months. A LinkedIn profile's posts made outside Rizamo are not listed, as LinkedIn lists them to select developers only. Each post has its latest metrics, read 1 hour and 6 hours after it went out (TikTok's and YouTube's from 24 hours, as their numbers come a day or more late), then daily to day 90 and every 30 days after (YouTube every 28; Google Business Profile every 28).
 
         Parameters
         ----------
@@ -780,7 +780,7 @@ class AsyncRawNetworkPostsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[NetworkPostTimeline]:
         """
-        What each day added to the post's numbers, and the totals after it, from Rizamo's reads: 1 hour and 6 hours after it went out (TikTok's and YouTube's from 24 hours), then daily to day 90 and every 30 days after (YouTube every 28). A day with no point had no change. A change between two reads several days apart is one point over those days, never split, and `gaps` says why, as it does for days Rizamo could not read. Days are the profile's.
+        What each day added to the post's numbers, and the totals after it, from Rizamo's reads: 1 hour and 6 hours after it went out (TikTok's and YouTube's from 24 hours), then daily to day 90 and every 30 days after (YouTube every 28; Google Business Profile every 28). A day with no point had no change. A change between two reads several days apart is one point over those days, never split, and `gaps` says why, as it does for days Rizamo could not read. Days are the profile's.
 
         Parameters
         ----------

@@ -8,7 +8,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 class AnalyticsOverviewKpisEngagements(UniversalBaseModel):
     """
-    Interactions with the posts, as each network counts them: Instagram, its own total (total_interactions); Facebook, its likes, comments and shares added up (stories: their own total, story_interaction); TikTok, its likes, comments, shares and saves added up; Threads, its likes, comments, reposts, quotes and shares added up; LinkedIn, its likes, comments, reposts, shares and saves added up; YouTube, none. received: those that arrived in the period; publish: those so far on the posts published in it.
+    Interactions with the posts, as each network counts them: Instagram, its own total (total_interactions); Facebook, its likes, comments and shares added up (stories: their own total, story_interaction); TikTok, its likes, comments, shares and saves added up; Threads, its likes, comments, reposts, quotes and shares added up; LinkedIn, its likes, comments, reposts, shares and saves added up; YouTube, none; Google Business Profile, none. received: those that arrived in the period; publish: those so far on the posts published in it.
     """
 
     value: typing.Optional[float] = None

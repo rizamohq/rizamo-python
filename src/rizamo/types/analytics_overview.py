@@ -78,7 +78,7 @@ class AnalyticsOverview(UniversalBaseModel):
 
     combined: typing.List[AnalyticsOverviewCombinedItem] = pydantic.Field()
     """
-    received only (empty with publish): changes of posts Rizamo cannot place on one day (with `interval` week or month, in one week or month), never split, such as a stretch it could not read an account, or a post read every 30 days (YouTube every 28) after its first 90: engagements, and views only of accounts whose own days give none. In the totals and `byNetwork`, not in `series`. One that began before the period is left out, and what a post gathered before its account was connected is on no day.
+    received only (empty with publish): changes of posts Rizamo cannot place on one day (with `interval` week or month, in one week or month), never split, such as a stretch it could not read an account, or a post read every 30 days (YouTube every 28; Google Business Profile every 28) after its first 90: engagements, and views only of accounts whose own days give none. In the totals and `byNetwork`, not in `series`. One that began before the period is left out, and what a post gathered before its account was connected is on no day.
     """
 
     by_network: typing_extensions.Annotated[

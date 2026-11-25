@@ -3,7 +3,7 @@
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=Rizamo%2FPython)
 [![pypi](https://img.shields.io/pypi/v/rizamo)](https://pypi.python.org/pypi/rizamo)
 
-Publish, schedule and measure social posts on Instagram, Facebook, TikTok, Threads, LinkedIn and YouTube from your code, answer comments and messages, and receive webhooks. Docs: https://docs.rizamo.com
+Publish, schedule and measure social posts on Instagram, Facebook, TikTok, Threads, LinkedIn, YouTube and Google Business Profile from your code, answer comments, messages and reviews, and receive webhooks. Docs: https://docs.rizamo.com
 
 ## Table of Contents
 
