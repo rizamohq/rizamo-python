@@ -7,6 +7,9 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .types import (
+        KeywordsAnalyticsResponse,
+        KeywordsAnalyticsResponseItemsItem,
+        KeywordsAnalyticsResponseItemsItemKeywordsItem,
         OverviewAnalyticsRequestAttribution,
         OverviewAnalyticsRequestInterval,
         PostsAnalyticsRequestOrder,
@@ -14,6 +17,9 @@ if typing.TYPE_CHECKING:
         PostsAnalyticsResponse,
     )
 _dynamic_imports: typing.Dict[str, str] = {
+    "KeywordsAnalyticsResponse": ".types",
+    "KeywordsAnalyticsResponseItemsItem": ".types",
+    "KeywordsAnalyticsResponseItemsItemKeywordsItem": ".types",
     "OverviewAnalyticsRequestAttribution": ".types",
     "OverviewAnalyticsRequestInterval": ".types",
     "PostsAnalyticsRequestOrder": ".types",
@@ -44,6 +50,9 @@ def __dir__():
 
 
 __all__ = [
+    "KeywordsAnalyticsResponse",
+    "KeywordsAnalyticsResponseItemsItem",
+    "KeywordsAnalyticsResponseItemsItemKeywordsItem",
     "OverviewAnalyticsRequestAttribution",
     "OverviewAnalyticsRequestInterval",
     "PostsAnalyticsRequestOrder",

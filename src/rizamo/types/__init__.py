@@ -36,6 +36,8 @@ if typing.TYPE_CHECKING:
     from .analytics_overview_attribution import AnalyticsOverviewAttribution
     from .analytics_overview_by_network_item import AnalyticsOverviewByNetworkItem
     from .analytics_overview_combined_item import AnalyticsOverviewCombinedItem
+    from .analytics_overview_google import AnalyticsOverviewGoogle
+    from .analytics_overview_google_locations_item import AnalyticsOverviewGoogleLocationsItem
     from .analytics_overview_kpis import AnalyticsOverviewKpis
     from .analytics_overview_kpis_engagement_rate import AnalyticsOverviewKpisEngagementRate
     from .analytics_overview_kpis_engagements import AnalyticsOverviewKpisEngagements
@@ -154,6 +156,9 @@ if typing.TYPE_CHECKING:
     from .target_options_facebook import TargetOptionsFacebook
     from .target_options_facebook_call_to_action import TargetOptionsFacebookCallToAction
     from .target_options_facebook_call_to_action_type import TargetOptionsFacebookCallToActionType
+    from .target_options_google import TargetOptionsGoogle
+    from .target_options_google_call_to_action import TargetOptionsGoogleCallToAction
+    from .target_options_google_call_to_action_type import TargetOptionsGoogleCallToActionType
     from .target_options_instagram import TargetOptionsInstagram
     from .target_options_instagram_fit import TargetOptionsInstagramFit
     from .target_options_instagram_music import TargetOptionsInstagramMusic
@@ -178,6 +183,11 @@ if typing.TYPE_CHECKING:
     from .teammate_role import TeammateRole
     from .thread import Thread
     from .thread_kind import ThreadKind
+    from .thread_review import ThreadReview
+    from .thread_review_media_item import ThreadReviewMediaItem
+    from .thread_review_media_item_type import ThreadReviewMediaItemType
+    from .thread_review_reply import ThreadReviewReply
+    from .thread_review_reply_state import ThreadReviewReplyState
     from .thread_sentiment import ThreadSentiment
     from .thread_status import ThreadStatus
     from .tik_tok_creator_info import TikTokCreatorInfo
@@ -233,6 +243,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AnalyticsOverviewAttribution": ".analytics_overview_attribution",
     "AnalyticsOverviewByNetworkItem": ".analytics_overview_by_network_item",
     "AnalyticsOverviewCombinedItem": ".analytics_overview_combined_item",
+    "AnalyticsOverviewGoogle": ".analytics_overview_google",
+    "AnalyticsOverviewGoogleLocationsItem": ".analytics_overview_google_locations_item",
     "AnalyticsOverviewKpis": ".analytics_overview_kpis",
     "AnalyticsOverviewKpisEngagementRate": ".analytics_overview_kpis_engagement_rate",
     "AnalyticsOverviewKpisEngagements": ".analytics_overview_kpis_engagements",
@@ -351,6 +363,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "TargetOptionsFacebook": ".target_options_facebook",
     "TargetOptionsFacebookCallToAction": ".target_options_facebook_call_to_action",
     "TargetOptionsFacebookCallToActionType": ".target_options_facebook_call_to_action_type",
+    "TargetOptionsGoogle": ".target_options_google",
+    "TargetOptionsGoogleCallToAction": ".target_options_google_call_to_action",
+    "TargetOptionsGoogleCallToActionType": ".target_options_google_call_to_action_type",
     "TargetOptionsInstagram": ".target_options_instagram",
     "TargetOptionsInstagramFit": ".target_options_instagram_fit",
     "TargetOptionsInstagramMusic": ".target_options_instagram_music",
@@ -375,6 +390,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "TeammateRole": ".teammate_role",
     "Thread": ".thread",
     "ThreadKind": ".thread_kind",
+    "ThreadReview": ".thread_review",
+    "ThreadReviewMediaItem": ".thread_review_media_item",
+    "ThreadReviewMediaItemType": ".thread_review_media_item_type",
+    "ThreadReviewReply": ".thread_review_reply",
+    "ThreadReviewReplyState": ".thread_review_reply_state",
     "ThreadSentiment": ".thread_sentiment",
     "ThreadStatus": ".thread_status",
     "TikTokCreatorInfo": ".tik_tok_creator_info",
@@ -454,6 +474,8 @@ __all__ = [
     "AnalyticsOverviewAttribution",
     "AnalyticsOverviewByNetworkItem",
     "AnalyticsOverviewCombinedItem",
+    "AnalyticsOverviewGoogle",
+    "AnalyticsOverviewGoogleLocationsItem",
     "AnalyticsOverviewKpis",
     "AnalyticsOverviewKpisEngagementRate",
     "AnalyticsOverviewKpisEngagements",
@@ -572,6 +594,9 @@ __all__ = [
     "TargetOptionsFacebook",
     "TargetOptionsFacebookCallToAction",
     "TargetOptionsFacebookCallToActionType",
+    "TargetOptionsGoogle",
+    "TargetOptionsGoogleCallToAction",
+    "TargetOptionsGoogleCallToActionType",
     "TargetOptionsInstagram",
     "TargetOptionsInstagramFit",
     "TargetOptionsInstagramMusic",
@@ -596,6 +621,11 @@ __all__ = [
     "TeammateRole",
     "Thread",
     "ThreadKind",
+    "ThreadReview",
+    "ThreadReviewMediaItem",
+    "ThreadReviewMediaItemType",
+    "ThreadReviewReply",
+    "ThreadReviewReplyState",
     "ThreadSentiment",
     "ThreadStatus",
     "TikTokCreatorInfo",

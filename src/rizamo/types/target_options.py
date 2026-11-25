@@ -5,6 +5,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .target_options_facebook import TargetOptionsFacebook
+from .target_options_google import TargetOptionsGoogle
 from .target_options_instagram import TargetOptionsInstagram
 from .target_options_linkedin import TargetOptionsLinkedin
 from .target_options_pinterest import TargetOptionsPinterest
@@ -24,6 +25,7 @@ class TargetOptions(UniversalBaseModel):
     threads: typing.Optional[TargetOptionsThreads] = None
     linkedin: typing.Optional[TargetOptionsLinkedin] = None
     youtube: typing.Optional[TargetOptionsYoutube] = None
+    google: typing.Optional[TargetOptionsGoogle] = None
     pinterest: typing.Optional[TargetOptionsPinterest] = None
 
     if IS_PYDANTIC_V2:

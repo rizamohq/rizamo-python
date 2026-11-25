@@ -7,6 +7,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.http_response import AsyncHttpResponse, HttpResponse
+from ..core.pagination import AsyncPager, SyncPager
 from ..core.parse_error import ParsingError
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
@@ -20,6 +21,8 @@ from ..errors.unauthorized_error import UnauthorizedError
 from ..types.analytics_overview import AnalyticsOverview
 from ..types.audience import Audience
 from ..types.error import Error
+from .types.keywords_analytics_response import KeywordsAnalyticsResponse
+from .types.keywords_analytics_response_items_item import KeywordsAnalyticsResponseItemsItem
 from .types.overview_analytics_request_attribution import OverviewAnalyticsRequestAttribution
 from .types.overview_analytics_request_interval import OverviewAnalyticsRequestInterval
 from .types.posts_analytics_request_order import PostsAnalyticsRequestOrder
@@ -495,6 +498,169 @@ class RawAnalyticsClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def keywords(
+        self,
+        *,
+        profile_id: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
+        from_: typing.Optional[str] = None,
+        to: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        cursor: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> SyncPager[KeywordsAnalyticsResponseItemsItem, KeywordsAnalyticsResponse]:
+        """
+        What people searched on Google Search and Maps when they found each Google Business Profile location in reach, by month, as Google ranks them: each keyword with the times the location showed for it, or under Google's threshold only that threshold. Rizamo reads the last 12 complete months, each again until a week into the next month (Google fills a month about 5 days in) and before it is 30 days old. A location with no month read yet has no items. A page at a time, the newest month first, a location and month an item.
+
+        Parameters
+        ----------
+        profile_id : typing.Optional[str]
+            Only this profile's (`prof_`): one brand or client, from List profiles. A profile you do not reach is refused as not found.
+
+        account_id : typing.Optional[str]
+            Only this location (`acc_`).
+
+        from_ : typing.Optional[str]
+            The first month, such as 2026-08. Left out: 3 months before `to`'s.
+
+        to : typing.Optional[str]
+            The last month, such as 2026-10. Left out: last month. Up to 12 months in all.
+
+        limit : typing.Optional[int]
+            How many to return, up to 50: 12 when left out.
+
+        cursor : typing.Optional[str]
+            `nextCursor` from the page before, with the same filters.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SyncPager[KeywordsAnalyticsResponseItemsItem, KeywordsAnalyticsResponse]
+            OK
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "analytics/keywords",
+            method="GET",
+            params={
+                "profileId": profile_id,
+                "accountId": account_id,
+                "from": from_,
+                "to": to,
+                "limit": limit,
+                "cursor": cursor,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _parsed_response = typing.cast(
+                    KeywordsAnalyticsResponse,
+                    parse_obj_as(
+                        type_=KeywordsAnalyticsResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                _items = _parsed_response.items
+                _parsed_next = _parsed_response.next_cursor
+                _has_next = _parsed_next is not None and _parsed_next != ""
+                _get_next = lambda: self.keywords(
+                    profile_id=profile_id,
+                    account_id=account_id,
+                    from_=from_,
+                    to=to,
+                    limit=limit,
+                    cursor=_parsed_next,
+                    request_options=request_options,
+                )
+                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next, response=_parsed_response)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        Error,
+                        parse_obj_as(
+                            type_=Error,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        Error,
+                        parse_obj_as(
+                            type_=Error,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        Error,
+                        parse_obj_as(
+                            type_=Error,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        Error,
+                        parse_obj_as(
+                            type_=Error,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 429:
+                raise TooManyRequestsError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        Error,
+                        parse_obj_as(
+                            type_=Error,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        Error,
+                        parse_obj_as(
+                            type_=Error,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 503:
+                raise ServiceUnavailableError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        Error,
+                        parse_obj_as(
+                            type_=Error,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
 
 class AsyncRawAnalyticsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -877,6 +1043,172 @@ class AsyncRawAnalyticsClient:
                     ),
                 )
                 return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        Error,
+                        parse_obj_as(
+                            type_=Error,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        Error,
+                        parse_obj_as(
+                            type_=Error,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        Error,
+                        parse_obj_as(
+                            type_=Error,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        Error,
+                        parse_obj_as(
+                            type_=Error,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 429:
+                raise TooManyRequestsError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        Error,
+                        parse_obj_as(
+                            type_=Error,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 500:
+                raise InternalServerError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        Error,
+                        parse_obj_as(
+                            type_=Error,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 503:
+                raise ServiceUnavailableError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        Error,
+                        parse_obj_as(
+                            type_=Error,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def keywords(
+        self,
+        *,
+        profile_id: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
+        from_: typing.Optional[str] = None,
+        to: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        cursor: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncPager[KeywordsAnalyticsResponseItemsItem, KeywordsAnalyticsResponse]:
+        """
+        What people searched on Google Search and Maps when they found each Google Business Profile location in reach, by month, as Google ranks them: each keyword with the times the location showed for it, or under Google's threshold only that threshold. Rizamo reads the last 12 complete months, each again until a week into the next month (Google fills a month about 5 days in) and before it is 30 days old. A location with no month read yet has no items. A page at a time, the newest month first, a location and month an item.
+
+        Parameters
+        ----------
+        profile_id : typing.Optional[str]
+            Only this profile's (`prof_`): one brand or client, from List profiles. A profile you do not reach is refused as not found.
+
+        account_id : typing.Optional[str]
+            Only this location (`acc_`).
+
+        from_ : typing.Optional[str]
+            The first month, such as 2026-08. Left out: 3 months before `to`'s.
+
+        to : typing.Optional[str]
+            The last month, such as 2026-10. Left out: last month. Up to 12 months in all.
+
+        limit : typing.Optional[int]
+            How many to return, up to 50: 12 when left out.
+
+        cursor : typing.Optional[str]
+            `nextCursor` from the page before, with the same filters.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncPager[KeywordsAnalyticsResponseItemsItem, KeywordsAnalyticsResponse]
+            OK
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "analytics/keywords",
+            method="GET",
+            params={
+                "profileId": profile_id,
+                "accountId": account_id,
+                "from": from_,
+                "to": to,
+                "limit": limit,
+                "cursor": cursor,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _parsed_response = typing.cast(
+                    KeywordsAnalyticsResponse,
+                    parse_obj_as(
+                        type_=KeywordsAnalyticsResponse,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                _items = _parsed_response.items
+                _parsed_next = _parsed_response.next_cursor
+                _has_next = _parsed_next is not None and _parsed_next != ""
+
+                async def _get_next():
+                    return await self.keywords(
+                        profile_id=profile_id,
+                        account_id=account_id,
+                        from_=from_,
+                        to=to,
+                        limit=limit,
+                        cursor=_parsed_next,
+                        request_options=request_options,
+                    )
+
+                return AsyncPager(has_next=_has_next, items=_items, get_next=_get_next, response=_parsed_response)
             if _response.status_code == 400:
                 raise BadRequestError(
                     headers=dict(_response.headers),

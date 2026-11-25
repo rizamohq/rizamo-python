@@ -59,7 +59,7 @@ class InboxClient:
             open: still needs an answer. done: answered or closed; a new message opens it again.
 
         kind : typing.Optional[ListInboxRequestKind]
-            comment: a first comment on a post, with the replies under it. dm: private messages with one person. mention and review: not collected yet.
+            comment: a first comment on a post, with the replies under it. dm: private messages with one person. review: a Google Business Profile review (the first message), with the business's one reply, which replying again replaces. mention: not collected yet.
 
         profile_id : typing.Optional[str]
             Only this profile's (`prof_`): one brand or client, from List profiles. A profile you do not reach is refused as not found.
@@ -520,7 +520,7 @@ class AsyncInboxClient:
             open: still needs an answer. done: answered or closed; a new message opens it again.
 
         kind : typing.Optional[ListInboxRequestKind]
-            comment: a first comment on a post, with the replies under it. dm: private messages with one person. mention and review: not collected yet.
+            comment: a first comment on a post, with the replies under it. dm: private messages with one person. review: a Google Business Profile review (the first message), with the business's one reply, which replying again replaces. mention: not collected yet.
 
         profile_id : typing.Optional[str]
             Only this profile's (`prof_`): one brand or client, from List profiles. A profile you do not reach is refused as not found.

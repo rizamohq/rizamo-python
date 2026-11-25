@@ -3,5 +3,5 @@
 import typing
 
 LinkConnectRequestNetwork = typing.Union[
-    typing.Literal["facebook", "instagram", "tiktok", "threads", "youtube"], typing.Any
+    typing.Literal["facebook", "instagram", "tiktok", "threads", "youtube", "google"], typing.Any
 ]

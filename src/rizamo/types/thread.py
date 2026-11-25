@@ -11,6 +11,7 @@ from .actor import Actor
 from .contact import Contact
 from .network import Network
 from .thread_kind import ThreadKind
+from .thread_review import ThreadReview
 from .thread_sentiment import ThreadSentiment
 from .thread_status import ThreadStatus
 
@@ -22,7 +23,12 @@ class Thread(UniversalBaseModel):
     network: Network
     kind: ThreadKind = pydantic.Field()
     """
-    comment: a first comment on a post, with the replies under it. dm: private messages with one person. mention and review: not collected yet.
+    comment: a first comment on a post, with the replies under it. dm: private messages with one person. review: a Google Business Profile review (the first message), with the business's one reply, which replying again replaces. mention: not collected yet.
+    """
+
+    review: typing.Optional[ThreadReview] = pydantic.Field(default=None)
+    """
+    Reviews: the stars, the reviewer's photos and videos, and Google's check of the reply. Null for every other kind.
     """
 
     contact: typing.Optional[Contact] = pydantic.Field(default=None)

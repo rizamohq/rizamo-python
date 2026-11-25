@@ -3,5 +3,6 @@
 import typing
 
 PostFormat = typing.Union[
-    typing.Literal["feed", "carousel", "reel", "story", "video", "short", "photo", "document", "pin"], typing.Any
+    typing.Literal["feed", "carousel", "reel", "story", "video", "short", "photo", "document", "pin", "event", "offer"],
+    typing.Any,
 ]

@@ -19,6 +19,8 @@ WebhookEventType = typing.Union[
         "comment.received",
         "message.received",
         "message.sent",
+        "review.received",
+        "review.updated",
         "comment_automation.sent",
         "comment_automation.failed",
         "comment_automation.paused",

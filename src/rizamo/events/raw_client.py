@@ -40,7 +40,7 @@ class RawEventsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SyncPager[Event, ListEventsResponse]:
         """
-        Every change on the team's posts and accounts in the last 30 days, newest first, with who made it: a person, an API key, an agent, or Rizamo itself; and the inbox's comments and messages as they arrive, the replies sent from Rizamo, and what comment automations do. The same events webhooks send, each as one item of this list. A page at a time: pass `nextCursor` as `cursor` for the next one. Someone limited to some profiles sees only those profiles' events. The inbox's and comment automations' events carry what people wrote: a key or agent reads them only with `inbox:read` (`comment.received`, `message.received`, `message.sent`) or `automations:read` (`comment_automation.*`) too; asking for one of those types without it answers 403.
+        Every change on the team's posts and accounts in the last 30 days, newest first, with who made it: a person, an API key, an agent, or Rizamo itself; and the inbox's comments and messages as they arrive, the replies sent from Rizamo, and what comment automations do. The same events webhooks send, each as one item of this list. A page at a time: pass `nextCursor` as `cursor` for the next one. Someone limited to some profiles sees only those profiles' events. The inbox's and comment automations' events carry what people wrote: a key or agent reads them only with `inbox:read` (`comment.received`, `message.received`, `message.sent`, `review.*`) or `automations:read` (`comment_automation.*`) too; asking for one of those types without it answers 403.
 
         Parameters
         ----------
@@ -197,7 +197,7 @@ class AsyncRawEventsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncPager[Event, ListEventsResponse]:
         """
-        Every change on the team's posts and accounts in the last 30 days, newest first, with who made it: a person, an API key, an agent, or Rizamo itself; and the inbox's comments and messages as they arrive, the replies sent from Rizamo, and what comment automations do. The same events webhooks send, each as one item of this list. A page at a time: pass `nextCursor` as `cursor` for the next one. Someone limited to some profiles sees only those profiles' events. The inbox's and comment automations' events carry what people wrote: a key or agent reads them only with `inbox:read` (`comment.received`, `message.received`, `message.sent`) or `automations:read` (`comment_automation.*`) too; asking for one of those types without it answers 403.
+        Every change on the team's posts and accounts in the last 30 days, newest first, with who made it: a person, an API key, an agent, or Rizamo itself; and the inbox's comments and messages as they arrive, the replies sent from Rizamo, and what comment automations do. The same events webhooks send, each as one item of this list. A page at a time: pass `nextCursor` as `cursor` for the next one. Someone limited to some profiles sees only those profiles' events. The inbox's and comment automations' events carry what people wrote: a key or agent reads them only with `inbox:read` (`comment.received`, `message.received`, `message.sent`, `review.*`) or `automations:read` (`comment_automation.*`) too; asking for one of those types without it answers 403.
 
         Parameters
         ----------

@@ -6,12 +6,18 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
+    from .keywords_analytics_response import KeywordsAnalyticsResponse
+    from .keywords_analytics_response_items_item import KeywordsAnalyticsResponseItemsItem
+    from .keywords_analytics_response_items_item_keywords_item import KeywordsAnalyticsResponseItemsItemKeywordsItem
     from .overview_analytics_request_attribution import OverviewAnalyticsRequestAttribution
     from .overview_analytics_request_interval import OverviewAnalyticsRequestInterval
     from .posts_analytics_request_order import PostsAnalyticsRequestOrder
     from .posts_analytics_request_sort import PostsAnalyticsRequestSort
     from .posts_analytics_response import PostsAnalyticsResponse
 _dynamic_imports: typing.Dict[str, str] = {
+    "KeywordsAnalyticsResponse": ".keywords_analytics_response",
+    "KeywordsAnalyticsResponseItemsItem": ".keywords_analytics_response_items_item",
+    "KeywordsAnalyticsResponseItemsItemKeywordsItem": ".keywords_analytics_response_items_item_keywords_item",
     "OverviewAnalyticsRequestAttribution": ".overview_analytics_request_attribution",
     "OverviewAnalyticsRequestInterval": ".overview_analytics_request_interval",
     "PostsAnalyticsRequestOrder": ".posts_analytics_request_order",
@@ -42,6 +48,9 @@ def __dir__():
 
 
 __all__ = [
+    "KeywordsAnalyticsResponse",
+    "KeywordsAnalyticsResponseItemsItem",
+    "KeywordsAnalyticsResponseItemsItemKeywordsItem",
     "OverviewAnalyticsRequestAttribution",
     "OverviewAnalyticsRequestInterval",
     "PostsAnalyticsRequestOrder",

@@ -683,7 +683,7 @@ client.accounts.get(
 <dl>
 <dd>
 
-It stops publishing and is no longer billed, and nothing changes on its network. Its posts: one that goes to it alone moves to Deleted (`post.deleted`), scheduled, draft or published, and can be restored for 30 days; one with other accounts keeps them, loses this account's part that never went out (`post.updated`) and keeps the part that did, with its `url` and without its numbers (`accountRemoved` on the target). The answer counts them by status (`Preview removing an account` counts them before). Its name, picture and followers go at once; its handle stays to name those parts, with their links, for as long as their posts exist. What Rizamo read from the network about its posts there is deleted, and so are its comments and messages in the inbox, with the events that carry them (`comment.received`, `message.received`, `message.sent`, `comment_automation.*`) and their webhook deliveries. Its comment automations are paused (each with a `comment_automation.paused` event) and their runs deleted with the comments, so their numbers start again from zero and people they answered may be answered once more. It is told as `account.removed` with `reason` `removed_by_team`, never `account.disconnected`, which is a lost login. Connecting it again brings back the same account, its automations paused, to resume; posts in Deleted are restored by hand. Removing an account changes the bill, so only owners remove one, or an API key an owner let remove accounts and delete profiles when making it (Developers in the web app); other API keys are refused (403).
+It stops publishing and is no longer billed, and nothing changes on its network. Its posts: one that goes to it alone moves to Deleted (`post.deleted`), scheduled, draft or published, and can be restored for 30 days; one with other accounts keeps them, loses this account's part that never went out (`post.updated`) and keeps the part that did, with its `url` and without its numbers (`accountRemoved` on the target). The answer counts them by status (`Preview removing an account` counts them before). Its name, picture and followers go at once; its handle stays to name those parts, with their links, for as long as their posts exist. What Rizamo read from the network about its posts there is deleted, and so are its comments and messages in the inbox, with the events that carry them (`comment.received`, `message.received`, `message.sent`, `review.*`, `comment_automation.*`) and their webhook deliveries. Its comment automations are paused (each with a `comment_automation.paused` event) and their runs deleted with the comments, so their numbers start again from zero and people they answered may be answered once more. It is told as `account.removed` with `reason` `removed_by_team`, never `account.disconnected`, which is a lost login. Connecting it again brings back the same account, its automations paused, to resume; posts in Deleted are restored by hand. Removing an account changes the bill, so only owners remove one, or an API key an owner let remove accounts and delete profiles when making it (Developers in the web app); other API keys are refused (403).
 </dd>
 </dl>
 </dd>
@@ -3789,7 +3789,7 @@ client.inbox.list()
 <dl>
 <dd>
 
-**kind:** `typing.Optional[ListInboxRequestKind]` — comment: a first comment on a post, with the replies under it. dm: private messages with one person. mention and review: not collected yet.
+**kind:** `typing.Optional[ListInboxRequestKind]` — comment: a first comment on a post, with the replies under it. dm: private messages with one person. review: a Google Business Profile review (the first message), with the business's one reply, which replying again replaces. mention: not collected yet.
     
 </dd>
 </dl>
@@ -5414,7 +5414,7 @@ client.comment_automations.test(
 </details>
 
 ## Analytics
-<details><summary><code>client.analytics.<a href="src/rizamo/analytics/client.py#L33-L105">overview</a>(...) -> AnalyticsOverview</code></summary>
+<details><summary><code>client.analytics.<a href="src/rizamo/analytics/client.py#L36-L108">overview</a>(...) -> AnalyticsOverview</code></summary>
 <dl>
 <dd>
 
@@ -5543,7 +5543,7 @@ client.analytics.overview(
 </dl>
 </details>
 
-<details><summary><code>client.analytics.<a href="src/rizamo/analytics/client.py#L107-L189">posts</a>(...) -> PostsAnalyticsResponse</code></summary>
+<details><summary><code>client.analytics.<a href="src/rizamo/analytics/client.py#L110-L192">posts</a>(...) -> PostsAnalyticsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5688,7 +5688,7 @@ client.analytics.posts(
 </dl>
 </details>
 
-<details><summary><code>client.analytics.<a href="src/rizamo/analytics/client.py#L191-L231">audience</a>(...) -> Audience</code></summary>
+<details><summary><code>client.analytics.<a href="src/rizamo/analytics/client.py#L194-L234">audience</a>(...) -> Audience</code></summary>
 <dl>
 <dd>
 
@@ -5750,6 +5750,121 @@ client.analytics.audience(
 <dd>
 
 **account_id:** `typing.Optional[str]` — Only this account (`acc_`).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.analytics.<a href="src/rizamo/analytics/client.py#L236-L304">keywords</a>(...) -> KeywordsAnalyticsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+What people searched on Google Search and Maps when they found each Google Business Profile location in reach, by month, as Google ranks them: each keyword with the times the location showed for it, or under Google's threshold only that threshold. Rizamo reads the last 12 complete months, each again until a week into the next month (Google fills a month about 5 days in) and before it is 30 days old. A location with no month read yet has no items. A page at a time, the newest month first, a location and month an item.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from rizamo import Rizamo
+from rizamo.environment import RizamoEnvironment
+
+client = Rizamo(
+    api_key="<token>",
+    environment=RizamoEnvironment.PRODUCTION,
+)
+
+client.analytics.keywords(
+    profile_id="prof_01m40k9k80fxd8cvng8derm7g9",
+    from_="2026-10",
+    to="2026-10",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**profile_id:** `typing.Optional[str]` — Only this profile's (`prof_`): one brand or client, from List profiles. A profile you do not reach is refused as not found.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_id:** `typing.Optional[str]` — Only this location (`acc_`).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**from:** `typing.Optional[str]` — The first month, such as 2026-08. Left out: 3 months before `to`'s.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**to:** `typing.Optional[str]` — The last month, such as 2026-10. Left out: last month. Up to 12 months in all.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — How many to return, up to 50: 12 when left out.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cursor:** `typing.Optional[str]` — `nextCursor` from the page before, with the same filters.
     
 </dd>
 </dl>
@@ -5846,7 +5961,7 @@ client.billing.get()
 <dl>
 <dd>
 
-Every change on the team's posts and accounts in the last 30 days, newest first, with who made it: a person, an API key, an agent, or Rizamo itself; and the inbox's comments and messages as they arrive, the replies sent from Rizamo, and what comment automations do. The same events webhooks send, each as one item of this list. A page at a time: pass `nextCursor` as `cursor` for the next one. Someone limited to some profiles sees only those profiles' events. The inbox's and comment automations' events carry what people wrote: a key or agent reads them only with `inbox:read` (`comment.received`, `message.received`, `message.sent`) or `automations:read` (`comment_automation.*`) too; asking for one of those types without it answers 403.
+Every change on the team's posts and accounts in the last 30 days, newest first, with who made it: a person, an API key, an agent, or Rizamo itself; and the inbox's comments and messages as they arrive, the replies sent from Rizamo, and what comment automations do. The same events webhooks send, each as one item of this list. A page at a time: pass `nextCursor` as `cursor` for the next one. Someone limited to some profiles sees only those profiles' events. The inbox's and comment automations' events carry what people wrote: a key or agent reads them only with `inbox:read` (`comment.received`, `message.received`, `message.sent`, `review.*`) or `automations:read` (`comment_automation.*`) too; asking for one of those types without it answers 403.
 </dd>
 </dl>
 </dd>
@@ -6086,7 +6201,7 @@ client.webhooks.create(
 <dl>
 <dd>
 
-**events:** `typing.Optional[typing.List[WebhookEventType]]` — The event types it receives. Null: every type, those Rizamo adds later included. A key or agent lists the inbox's types (`comment.received`, `message.received`, `message.sent`) only with `inbox:read`, and `comment_automation.*` only with `automations:read`; with null, the endpoint gets none of those it cannot read.
+**events:** `typing.Optional[typing.List[WebhookEventType]]` — The event types it receives. Null: every type, those Rizamo adds later included. A key or agent lists the inbox's types (`comment.received`, `message.received`, `message.sent`, `review.*`) only with `inbox:read`, and `comment_automation.*` only with `automations:read`; with null, the endpoint gets none of those it cannot read.
     
 </dd>
 </dl>
@@ -6264,7 +6379,7 @@ client.webhooks.update(
 <dl>
 <dd>
 
-**events:** `typing.Optional[typing.List[WebhookEventType]]` — The event types it receives. Null: every type, those Rizamo adds later included. A key or agent lists the inbox's types (`comment.received`, `message.received`, `message.sent`) only with `inbox:read`, and `comment_automation.*` only with `automations:read`; with null, the endpoint gets none of those it cannot read.
+**events:** `typing.Optional[typing.List[WebhookEventType]]` — The event types it receives. Null: every type, those Rizamo adds later included. A key or agent lists the inbox's types (`comment.received`, `message.received`, `message.sent`, `review.*`) only with `inbox:read`, and `comment_automation.*` only with `automations:read`; with null, the endpoint gets none of those it cannot read.
     
 </dd>
 </dl>

@@ -4,10 +4,13 @@ import datetime as dt
 import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ..core.pagination import AsyncPager, SyncPager
 from ..core.request_options import RequestOptions
 from ..types.analytics_overview import AnalyticsOverview
 from ..types.audience import Audience
 from .raw_client import AsyncRawAnalyticsClient, RawAnalyticsClient
+from .types.keywords_analytics_response import KeywordsAnalyticsResponse
+from .types.keywords_analytics_response_items_item import KeywordsAnalyticsResponseItemsItem
 from .types.overview_analytics_request_attribution import OverviewAnalyticsRequestAttribution
 from .types.overview_analytics_request_interval import OverviewAnalyticsRequestInterval
 from .types.posts_analytics_request_order import PostsAnalyticsRequestOrder
@@ -229,6 +232,76 @@ class AnalyticsClient:
             profile_id=profile_id, account_id=account_id, request_options=request_options
         )
         return _response.data
+
+    def keywords(
+        self,
+        *,
+        profile_id: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
+        from_: typing.Optional[str] = None,
+        to: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        cursor: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> SyncPager[KeywordsAnalyticsResponseItemsItem, KeywordsAnalyticsResponse]:
+        """
+        What people searched on Google Search and Maps when they found each Google Business Profile location in reach, by month, as Google ranks them: each keyword with the times the location showed for it, or under Google's threshold only that threshold. Rizamo reads the last 12 complete months, each again until a week into the next month (Google fills a month about 5 days in) and before it is 30 days old. A location with no month read yet has no items. A page at a time, the newest month first, a location and month an item.
+
+        Parameters
+        ----------
+        profile_id : typing.Optional[str]
+            Only this profile's (`prof_`): one brand or client, from List profiles. A profile you do not reach is refused as not found.
+
+        account_id : typing.Optional[str]
+            Only this location (`acc_`).
+
+        from_ : typing.Optional[str]
+            The first month, such as 2026-08. Left out: 3 months before `to`'s.
+
+        to : typing.Optional[str]
+            The last month, such as 2026-10. Left out: last month. Up to 12 months in all.
+
+        limit : typing.Optional[int]
+            How many to return, up to 50: 12 when left out.
+
+        cursor : typing.Optional[str]
+            `nextCursor` from the page before, with the same filters.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SyncPager[KeywordsAnalyticsResponseItemsItem, KeywordsAnalyticsResponse]
+            OK
+
+        Examples
+        --------
+        from rizamo import Rizamo
+
+        client = Rizamo(
+            api_key="YOUR_API_KEY",
+        )
+        response = client.analytics.keywords(
+            profile_id="prof_01m40k9k80fxd8cvng8derm7g9",
+            from_="2026-10",
+            to="2026-10",
+        )
+        for item in response:
+            yield item
+        # alternatively, you can paginate page-by-page
+        for page in response.iter_pages():
+            yield page
+        """
+        return self._raw_client.keywords(
+            profile_id=profile_id,
+            account_id=account_id,
+            from_=from_,
+            to=to,
+            limit=limit,
+            cursor=cursor,
+            request_options=request_options,
+        )
 
 
 class AsyncAnalyticsClient:
@@ -469,3 +542,82 @@ class AsyncAnalyticsClient:
             profile_id=profile_id, account_id=account_id, request_options=request_options
         )
         return _response.data
+
+    async def keywords(
+        self,
+        *,
+        profile_id: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = None,
+        from_: typing.Optional[str] = None,
+        to: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        cursor: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncPager[KeywordsAnalyticsResponseItemsItem, KeywordsAnalyticsResponse]:
+        """
+        What people searched on Google Search and Maps when they found each Google Business Profile location in reach, by month, as Google ranks them: each keyword with the times the location showed for it, or under Google's threshold only that threshold. Rizamo reads the last 12 complete months, each again until a week into the next month (Google fills a month about 5 days in) and before it is 30 days old. A location with no month read yet has no items. A page at a time, the newest month first, a location and month an item.
+
+        Parameters
+        ----------
+        profile_id : typing.Optional[str]
+            Only this profile's (`prof_`): one brand or client, from List profiles. A profile you do not reach is refused as not found.
+
+        account_id : typing.Optional[str]
+            Only this location (`acc_`).
+
+        from_ : typing.Optional[str]
+            The first month, such as 2026-08. Left out: 3 months before `to`'s.
+
+        to : typing.Optional[str]
+            The last month, such as 2026-10. Left out: last month. Up to 12 months in all.
+
+        limit : typing.Optional[int]
+            How many to return, up to 50: 12 when left out.
+
+        cursor : typing.Optional[str]
+            `nextCursor` from the page before, with the same filters.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncPager[KeywordsAnalyticsResponseItemsItem, KeywordsAnalyticsResponse]
+            OK
+
+        Examples
+        --------
+        import asyncio
+
+        from rizamo import AsyncRizamo
+
+        client = AsyncRizamo(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            response = await client.analytics.keywords(
+                profile_id="prof_01m40k9k80fxd8cvng8derm7g9",
+                from_="2026-10",
+                to="2026-10",
+            )
+            async for item in response:
+                yield item
+
+            # alternatively, you can paginate page-by-page
+            async for page in response.iter_pages():
+                yield page
+
+
+        asyncio.run(main())
+        """
+        return await self._raw_client.keywords(
+            profile_id=profile_id,
+            account_id=account_id,
+            from_=from_,
+            to=to,
+            limit=limit,
+            cursor=cursor,
+            request_options=request_options,
+        )

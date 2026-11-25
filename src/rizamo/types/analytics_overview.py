@@ -11,6 +11,7 @@ from .analytics_note import AnalyticsNote
 from .analytics_overview_attribution import AnalyticsOverviewAttribution
 from .analytics_overview_by_network_item import AnalyticsOverviewByNetworkItem
 from .analytics_overview_combined_item import AnalyticsOverviewCombinedItem
+from .analytics_overview_google import AnalyticsOverviewGoogle
 from .analytics_overview_kpis import AnalyticsOverviewKpis
 from .analytics_overview_previous import AnalyticsOverviewPrevious
 from .analytics_overview_series_item import AnalyticsOverviewSeriesItem
@@ -63,6 +64,11 @@ class AnalyticsOverview(UniversalBaseModel):
     ]
     """
     The accounts' own numbers, added up over the period's days: views, engagements, follows, unfollows, profile_actions (taps on a profile's buttons) and more, as each network gives them, such as Facebook's profile_visits and video_views, Threads' views (its posts' views, which Meta's reference calls profile views), reposts, quotes and clicks (on links the profile shared), or YouTube's watch_time (in milliseconds, as every watch time) and follows and unfollows (subscribers gained and lost), 2 to 3 days late. Views and reach come split too, each part as the network gives it, so the parts need not add up to the whole: by followers (views_followers and views_non_followers on Instagram, Facebook Pages and YouTube, where they are subscribers or not; reach_followers and reach_non_followers on Instagram), by format (views_feed, views_carousel, views_reel and views_story on Instagram; views_short, views_video and views_live on YouTube) and by ads (views_paid on Instagram and Facebook Pages, views_organic on Facebook Pages). Only metrics in each network's reference are read. reach (people who saw the accounts' content: Instagram, Facebook Pages, and TikTok accounts with advanced access) and accounts_engaged (Instagram, and TikTok with advanced access) are each day's people added up, so someone reached on two days counts twice; missing where no account gives them. A day not collected adds nothing, and `notes` says so.
+    """
+
+    google: typing.Optional[AnalyticsOverviewGoogle] = pydantic.Field(default=None)
+    """
+    Google Business Profile's own numbers, apart from every other network's, as Google asks: by Google's day, which come up to 6 days late (the last days fill in later). Missing when no Google Business Profile location is in reach. Google gives no numbers per post.
     """
 
     series: typing.List[AnalyticsOverviewSeriesItem] = pydantic.Field()
