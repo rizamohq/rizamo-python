@@ -6,7 +6,7 @@ license-files = ["LICENSE"]
 
 [tool.poetry]
 name = "rizamo"
-version = "1.4.0"
+version = "1.5.0"
 description = "The official Python SDK for the Rizamo API: publish, schedule and measure social posts on Instagram, Facebook, TikTok, Threads, LinkedIn, YouTube and Google Business Profile, answer comments, messages and reviews, and receive webhooks."
 readme = "README.md"
 authors = [

@@ -75,6 +75,18 @@ class TargetOptionsYoutube(UniversalBaseModel):
     Discloses realistic altered or synthetic content (YouTube's `containsSyntheticMedia`).
     """
 
+    paid_product_placement: typing_extensions.Annotated[
+        typing.Optional[bool],
+        FieldMetadata(alias="paidProductPlacement"),
+        pydantic.Field(
+            alias="paidProductPlacement",
+            description="Whether the video has paid product placement (YouTube's `hasPaidProductPlacement`): true declares it, false declares there is none. Left out, Rizamo sends nothing and the video declares nothing: since November 16, 2026, YouTube no longer reads a missing answer as false. It is the person's own declaration: ask them rather than guess.",
+        ),
+    ] = None
+    """
+    Whether the video has paid product placement (YouTube's `hasPaidProductPlacement`): true declares it, false declares there is none. Left out, Rizamo sends nothing and the video declares nothing: since November 16, 2026, YouTube no longer reads a missing answer as false. It is the person's own declaration: ask them rather than guess.
+    """
+
     thumbnail_media_id: typing_extensions.Annotated[
         typing.Optional[str],
         FieldMetadata(alias="thumbnailMediaId"),
